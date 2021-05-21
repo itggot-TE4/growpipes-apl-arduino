@@ -1,0 +1,65 @@
+#main.rb
+
+if arduino_found?
+    t = TemperatureSensor
+else
+    t = FakeTemperatureSensor
+end
+
+
+g = Graph.new(t.new, 
+              PHSensor.new()
+            )
+g.render
+
+
+
+
+class Graph
+
+    def initialize(tsensor, phsensor)
+       @t = tsensor
+       @ph = phsensor 
+
+       #x.is_a? Sensor
+    end
+
+
+    def render
+     
+        t.fetch_value
+
+    end
+
+
+
+end
+
+class Sensor
+end
+
+
+class FakeTemperatureSensor < Sensor
+
+    def fetch_value
+        rand(16..23)
+    end
+
+end
+
+class TemperatureSensor
+
+
+    def fetch_value
+        #...
+    end
+
+end
+
+class PHSensor
+
+    def fetch_value
+        #...
+    end
+
+end
